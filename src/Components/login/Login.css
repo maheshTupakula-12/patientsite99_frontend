@@ -1,0 +1,16 @@
+.login_form{
+    display:flex;
+    flex-direction: column;
+    background-color:white;
+    width:200px;
+    background-color: lightblue;
+    padding:20px 20px 20px 20px;
+}
+
+
+.login{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}

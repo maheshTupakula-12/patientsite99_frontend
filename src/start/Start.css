@@ -1,0 +1,23 @@
+.start{
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    background-color: #E0F7FA;
+}
+
+.middle{
+    display:flex;
+    align-items: center;
+    flex-direction:column;
+    width:600px;
+    height:50%;
+    background-color:gray;
+}
+
+button{
+    width:100px;
+    padding:4px 4px 4px 4px;
+    cursor:pointer;
+    border:"none"
+}

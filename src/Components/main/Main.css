@@ -1,0 +1,46 @@
+.main{
+    height:100vh;
+    background-color:#E0F7FA;
+}
+
+.header{
+    height:70px;
+    display:flex;
+    color:white;
+    column-gap:30px;
+    background-color: #1E3A5F;
+}
+
+.search-div{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    column-gap:30px;
+}
+
+.sidebar{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+
+.about{
+    display:flex;
+    justify-content: center;
+    column-gap:30px;
+    align-items:center;
+}
+
+.services-div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-div{
+    padding:50px 100px 0px 100px;
+    display:grid;
+    grid-template-columns: 300px 300px 300px 300px;
+    column-gap:40px;
+}
