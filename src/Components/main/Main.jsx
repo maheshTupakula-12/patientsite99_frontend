@@ -85,6 +85,7 @@ function Main() {
         }
 
     }, [searchText, searchResults, searchType])
+    const [feedbackData,setFeedbackData] = useState([]);
     useEffect(() => {
         async function getInfo() {
             fetch("https://doctorsite-backend.onrender.com/doc/info")
@@ -92,11 +93,19 @@ function Main() {
                 .then(data => {
                     console.log(data)
                     setDoctors(data["data"])
+                    const feedbackList = data["data"]?.map((doc)=>{
+                        return {
+                            doctor_name:doc.name,
+                            doctor_id:doc.id
+                        }
+                    })
+                    setFeedbackData(feedbackList)
                     const expertiseList = data["data"]?.map((doc) => doc.expertise)
                     const doctorsList = data["data"]?.map((doc) => doc.name)
                     dispatch(setList({ list: expertiseList }));
                     console.log({ expertise: expertiseList, doctors: doctorsList })
                     setSearchResults({ expertise: expertiseList, doctors: doctorsList })
+                    console.log({ expertise: expertiseList, doctors: doctorsList })
                 })
                 .catch(err => console.log(err))
         }
@@ -130,7 +139,7 @@ function Main() {
                         // backgroundColor:"blue"
                     }}>
                     <button
-                        onClick={() => navigate("/feedback")}
+                        onClick={() => navigate("/feedback",{state:{list:feedbackData}})}
                         style={{
                             backgroundColor: "#007bff",
                             color: "#fff",
