@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./Feedback.css"
 
 function Feedback(){
+    const {state} = useLocation();
+    const [doctorList,setDoctorList] = useState([]);
+    useEffect(()=>{
+        setDoctorList(state.list);
+        console.log(state.list)
+    },[])
     const [feedback,setFeedback] = useState({
         disease:"",
         doctor:"",
@@ -12,6 +20,11 @@ function Feedback(){
     const handleInputChange = (e)=>{
         setFeedback({...feedback,[e.target.name]:e.target.value});
     }
+
+    useEffect(()=>{
+        console.log(feedback)
+    },[feedback])
+   
     const feedbackData = (e)=>{
         e.preventDefault();
         fetch("https://doctorsite-backend.onrender.com/pat/feedback",{
@@ -21,7 +34,7 @@ function Feedback(){
             },
             body:JSON.stringify({
                 email:localStorage.getItem("email"),
-                feedback,
+                feedback:{...feedback,mail:localStorage.getItem("email")}
             }),
             credentials:"include"
         }).then((response)=>response.json())
@@ -43,7 +56,7 @@ function Feedback(){
     }
     return (
         <div
-    style={{
+        style={{
         height: "100vh",
         display: "flex",
         alignItems: "center",
@@ -88,7 +101,14 @@ function Feedback(){
                 }}
             />
             
-            <input
+            <select value={feedback.doctor} onChange={handleInputChange} name="doctor" >
+                <option value="">select doctor</option>
+                {
+                    doctorList?.map((doctor,_)=>(<option value={doctor.id} key={doctor.doctor_id}>{doctor.doctor_name}</option>))
+                }
+            </select>
+
+            {/* <input
                 type="text"
                 onChange={handleInputChange}
                 value={feedback.doctor}
@@ -101,7 +121,7 @@ function Feedback(){
                     border: "1px solid #ccc",
                     fontSize: "16px",
                 }}
-            />
+            /> */}
             
             <input
                 type="text"
