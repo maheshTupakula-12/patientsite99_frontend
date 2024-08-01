@@ -309,7 +309,7 @@ function Main() {
                             <div style={{ backgroundColor: "white", height: "170px" }}>
                                 {console.log(doc.image_of_doctor)}
                                 <img style={{ height: "100%", width: "100%", objectFit: "contain" }} src={doc.image_of_doctor === "" ?
-                                    doctor : `https://doctorsite-backend.onrender.com/uploads/${doc.image_of_doctor}`} alt={"doc"} />
+                                    doctor : doc.image_of_doctor  } alt={"doc"} />
                             </div>
                             <div style={{ padding: "10px 10px 10px 10px" }}>
                                 <div>Name:{doc.name}</div>

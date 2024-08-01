@@ -131,9 +131,9 @@ function BookAppointment() {
 
 
     const bookSlot = async () => {
-        if(timeData === ""){
+        if (timeData === "") {
             toast.error("please select time")
-            return ;
+            return;
         }
         setStatus("")
         setShowLoader(true)
@@ -171,7 +171,9 @@ function BookAppointment() {
                 setShowLoader(false)
             })
     }
-
+    useEffect(()=>{
+        console.log(status)
+    },[status])
     return (
         <div style={{ height: "100vh", padding: "10px 10px 10px 10px", overFlow: "auto" }}>
             <div style={{ display: "flex" }}>
@@ -181,7 +183,7 @@ function BookAppointment() {
                     transition={{ duration: 0.5 }}
                     style={{ marginRight: "40px", width: "300px", height: '330px', backgroundColor: "gray", color: "white", boxShadow: "0 4px 8px rgba(0,0,0,0.9)" }}>
                     <div style={{ backgroundColor: "white", height: "170px" }}>
-                        <img style={{ height: "100%", width: "100%", objectFit: "contain" }} src={bool_value === false ? doctor : `https://doctorsite-backend.onrender.com/uploads/${input_str}`} alt={"doc"} />
+                        <img style={{ height: "100%", width: "100%", objectFit: "contain" }} src={bool_value === false ? doctor : input_str} alt={"doc"} />
                     </div>
                     <div style={{ padding: "10px 10px 10px 10px" }}>
                         <div>Name:{doc.name}</div>
@@ -194,13 +196,28 @@ function BookAppointment() {
                         </div>
                     </div>
                 </motion.div>
-                <div style={{ width: "60vw", backgroundColor: "gray", color: "white", padding: "20px 20px 20px 20px" }}>
-                    <p>
-                        Dr. Manoj is a seasoned medical professional with a decade of experience in pulmonology. Specializing in lung-related conditions, he has built a strong reputation for his expertise and dedication to patient care. Dr. Manoj holds an MBBS degree, equipping him with the comprehensive medical knowledge and skills necessary to diagnose and treat a wide range of respiratory illnesses.
-
-                        Operating from his clinic in Ban, Dr. Manoj is committed to providing high-quality healthcare services to his community. His extensive experience and specialized knowledge make him a reliable choice for patients seeking expert advice and treatment for lung conditions.
+                <div style={{ width: "60vw", backgroundColor: "gray", color: "white", padding: "20px" }}>
+                    <p style={{ height: "40vh", overflow: "auto" }}>
+                        {doc.description}
                     </p>
+                    <style>
+                        {`
+        /* Customize the scrollbar for WebKit browsers */
+        p::-webkit-scrollbar {
+            width: 5px;
+        }
+        p::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        p::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        `}
+                    </style>
                 </div>
+
+
             </div>
             <div style={{ marginTop: "40px" }}>
                 <div style={{ width: "1100px", display: "flex", flexDirection: "column", rowGap: "20px" }}>
@@ -281,22 +298,19 @@ function BookAppointment() {
                                         fontSize: "16px"
                                     }}
                                 >
-                                    {services?.map((service, idx) => (
-                                        <div
-                                            data-value={service}
-                                            key={idx}
-                                            style={{
-                                                padding: "10px",
-                                                borderBottom: "1px solid #eee",
-                                                cursor: "pointer",
-                                                transition: "background-color 0.3s",
-                                            }}
-                                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f1f1f1"}
-                                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#fff"}
-                                        >
-                                            {service}
-                                        </div>
-                                    ))}
+                                    <div
+                                        data-value={doc.expertise}
+                                        style={{
+                                            padding: "10px",
+                                            borderBottom: "1px solid #eee",
+                                            cursor: "pointer",
+                                            transition: "background-color 0.3s",
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f1f1f1"}
+                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#fff"}
+                                    >
+                                        {doc.expertise}
+                                    </div>
                                 </div>
                             )}
                         </div>
